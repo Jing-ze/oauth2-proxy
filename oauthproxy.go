@@ -508,7 +508,7 @@ func (p *OAuthProxy) SetContext(ctx wrapper.HttpContext) {
 }
 
 func (p *OAuthProxy) SetVerifier(opts *options.Options) {
-	if p.provider.Data().Verifier == nil && oidcHandler.provider.Data().NeedsVerifier {
+	if p.provider.Data().Verifier == nil && p.provider.Data().NeedsVerifier {
 		providers.NewVerifierFromConfig(opts.Providers[0], p.provider.Data(), p.client)
 	}
 }
