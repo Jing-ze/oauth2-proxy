@@ -22,6 +22,7 @@ func Validate(o *options.Options) error {
 		util.Logger.Info("WARNING: no explicit redirect URL: redirects will default to insecure HTTP")
 	}
 
+	msgs = append(msgs, validateMatchRules(o.MatchRules)...)
 	o.SetMatchRuleDomainDefault()
 
 	if len(msgs) != 0 {
@@ -38,4 +39,20 @@ func parseURL(toParse string, urltype string, msgs []string) (*url.URL, []string
 			"error parsing %s-url=%q %s", urltype, toParse, err))
 	}
 	return parsed, msgs
+}
+
+func validateMatchRules(matchRules options.MatchRules) []string {
+	msgs := []string{}
+
+	// 检查 RuleList 的每一个 Rule
+	for _, rule := range matchRules.RuleList {
+		// 验证 Path 和 Rule
+		if rule.Path == "" {
+			msgs = append(msgs, fmt.Sprintf("Rule: %+v, Path cannot be empty", rule))
+		}
+		if rule.Rule == "" {
+			msgs = append(msgs, fmt.Sprintf("Rule: %+v, Rule cannot be empty", rule))
+		}
+	}
+	return msgs
 }
