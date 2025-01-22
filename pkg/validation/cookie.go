@@ -51,7 +51,7 @@ func validateCookieName(name string) []string {
 
 func validateCookieSecret(secret string) []string {
 	if secret == "" {
-		return []string{"missing setting: cookie-secret"}
+		return []string{"missing setting: cookie_secret"}
 	}
 
 	secretBytes := encryption.SecretBytes(secret)

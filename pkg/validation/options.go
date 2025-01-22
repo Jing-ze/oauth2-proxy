@@ -22,6 +22,8 @@ func Validate(o *options.Options) error {
 		util.Logger.Info("WARNING: no explicit redirect URL: redirects will default to insecure HTTP")
 	}
 
+	o.SetMatchRuleDomainDefault()
+
 	if len(msgs) != 0 {
 		return fmt.Errorf("invalid configuration:\n  %s",
 			strings.Join(msgs, "\n  "))
