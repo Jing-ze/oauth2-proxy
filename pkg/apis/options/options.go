@@ -50,6 +50,16 @@ func (o *Options) SetRedirectURL(s *url.URL) {
 	o.MatchRules.RedirectURL = s
 }
 
+func (o *Options) SetMatchRuleDomainDefault() {
+	if o.MatchRules.RuleList != nil {
+		for i := range o.MatchRules.RuleList {
+			if o.MatchRules.RuleList[i].Domain == "" {
+				o.MatchRules.RuleList[i].Domain = "*"
+			}
+		}
+	}
+}
+
 // NewOptions constructs a new Options with defaulted values
 func NewOptions() *Options {
 	return &Options{

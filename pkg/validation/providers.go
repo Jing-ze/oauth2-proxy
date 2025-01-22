@@ -3,7 +3,7 @@ package validation
 import (
 	"fmt"
 
-	"github.com/higress-group/oauth2-proxy/pkg/apis/options"
+	"github.com/Jing-ze/oauth2-proxy/pkg/apis/options"
 )
 
 // validateProviders is the initial validation migration for multiple providrers
@@ -39,13 +39,13 @@ func validateProvider(provider options.Provider, providerIDs map[string]struct{}
 	providerIDs[provider.ID] = struct{}{}
 
 	if provider.ClientID == "" {
-		msgs = append(msgs, "provider missing setting: client-id")
+		msgs = append(msgs, "provider missing setting: client_id")
 	}
 
 	// login.gov uses a signed JWT to authenticate, not a client-secret
 	if provider.Type != "login.gov" {
 		if provider.ClientSecret == "" {
-			msgs = append(msgs, "missing setting: client-secret or client-secret-file")
+			msgs = append(msgs, "missing setting: client-secret")
 		}
 	}
 

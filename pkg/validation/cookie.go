@@ -6,8 +6,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/higress-group/oauth2-proxy/pkg/apis/options"
-	"github.com/higress-group/oauth2-proxy/pkg/encryption"
+	"github.com/Jing-ze/oauth2-proxy/pkg/apis/options"
+	"github.com/Jing-ze/oauth2-proxy/pkg/encryption"
 )
 
 func validateCookie(o options.Cookie) []string {
@@ -51,7 +51,7 @@ func validateCookieName(name string) []string {
 
 func validateCookieSecret(secret string) []string {
 	if secret == "" {
-		return []string{"missing setting: cookie-secret"}
+		return []string{"missing setting: cookie_secret"}
 	}
 
 	secretBytes := encryption.SecretBytes(secret)

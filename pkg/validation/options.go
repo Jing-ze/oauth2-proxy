@@ -5,8 +5,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/higress-group/oauth2-proxy/pkg/apis/options"
-	"github.com/higress-group/oauth2-proxy/pkg/util"
+	"github.com/Jing-ze/oauth2-proxy/pkg/apis/options"
+	"github.com/Jing-ze/oauth2-proxy/pkg/util"
 )
 
 // Validate checks that required options are set and validates those that they
@@ -21,6 +21,8 @@ func Validate(o *options.Options) error {
 	if o.RawRedirectURL == "" && !o.Cookie.Secure && !o.ReverseProxy {
 		util.Logger.Info("WARNING: no explicit redirect URL: redirects will default to insecure HTTP")
 	}
+
+	o.SetMatchRuleDomainDefault()
 
 	if len(msgs) != 0 {
 		return fmt.Errorf("invalid configuration:\n  %s",
